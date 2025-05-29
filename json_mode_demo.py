@@ -40,7 +40,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 
 text = response.choices[0].message.content
-if "true" in text.lower():
+if text and "true" in text.lower():
     print("[bold red]This is a complaint letter.[/bold red]")
 else:
     print("[bold green]This is not a complaint letter.[/bold green]")
