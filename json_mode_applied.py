@@ -70,4 +70,7 @@ if letter_info is not None and letter_info.is_complaint:
     print(f"Reason: {letter_info.is_complaint_reason} with confidence score {letter_info.confidence_score:.2f}")
 else:
     print("[bold green]This is not a complaint letter.[/bold green]")
-    print(f"Reason: {letter_info.is_complaint_reason} with confidence score {letter_info.confidence_score:.2f}")
+    if letter_info is not None:
+        print(f"Reason: {letter_info.is_complaint_reason} with confidence score {letter_info.confidence_score:.2f}")
+    else:
+        print("No letter information could be parsed from the response.")
