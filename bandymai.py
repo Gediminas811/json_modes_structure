@@ -14,12 +14,17 @@ model = "openai/gpt-4.1-nano"
 # OpenAI client
 client = openai.OpenAI(api_key=token, base_url=endpoint)
 
-# Define validation model
+# Pydantic validation model
 class LithuanianQuestionCheck(BaseModel):
     is_lithuanian_language: bool
 
-# Get user input
-question = input("Hello! Enter your question in Lithuanian: ")
+# User input
+question = input("Hello! Enter your question in Lithuanian (or type 'exit' to quit): ")
+
+# Program Exit condition
+if question.strip().lower() == "exit":
+    print("[bold green]Iki! Programa baigta.[/bold green]")
+    exit()
 
 # Step 1: Language detection
 response = client.beta.chat.completions.parse(
@@ -52,7 +57,7 @@ try:
             ]
         )
         reply = answer.choices[0].message.content
-        print("Atsakymas:", reply.strip() if reply else "(nėra atsakymo)")
+        print(reply.strip() if reply else "(nėra atsakymo)")
     else:
         print("Klausimas nėra lietuvių kalba, todėl neatsakysiu.")
 
